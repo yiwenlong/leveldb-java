@@ -1,7 +1,5 @@
 package io.yiwenlong.leveldb.format;
 
-import java.nio.ByteBuffer;
-
 public final class Slice implements Comparable<Slice>{
 
 	private final byte[] data;
@@ -30,8 +28,10 @@ public final class Slice implements Comparable<Slice>{
 		this(d, d.length);
 	}
 
-	public ByteBuffer data() {
-		return ByteBuffer.wrap(data, offset, size);
+	public byte[] data() {
+		byte[] tmp = new byte[size];
+		System.arraycopy(data, offset, tmp, 0, size);
+		return tmp;
 	}
 
 	public int size() {
@@ -68,6 +68,12 @@ public final class Slice implements Comparable<Slice>{
 			}
 		}
 		return 0;
+	}
+
+	// Returns the user key portion of an internal key.
+	public Slice extractUserKey() {
+		assert this.size() > 8;
+		return new Slice(this.data(), this.size() - 8);
 	}
 
 
