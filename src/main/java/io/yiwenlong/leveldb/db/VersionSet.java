@@ -5,11 +5,11 @@ import io.yiwenlong.leveldb.log.Writer;
 
 public class VersionSet {
 
-	private Env env;
-	private String dbname;
-	private Options options;
-	private TableCache tableCache;
-	private InternalKeyComparator icmp;
+	private Env env_;
+	private String dbname_;
+	private Options options_;
+	private TableCache tableCache_;
+	private InternalKeyComparator icmp_;
 
 	private long nextFileNumber_;
 	private long manifestFileNumber_;
@@ -62,7 +62,9 @@ public class VersionSet {
 	}
 
 	// Return the number of Table files at the specified level.
-	public int numLevelFiles(int level) {
-		return 0;
-	}
+	public int numLevelFiles(int level) { return 0; }
+
+	public Options options() { return options_; }
+
+	public InternalKeyComparator icmp() { return icmp_; }
 }

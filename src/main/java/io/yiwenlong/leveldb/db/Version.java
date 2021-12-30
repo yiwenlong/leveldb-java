@@ -7,12 +7,12 @@ import io.yiwenlong.leveldb.format.Slice;
 
 public class Version {
 
-	private VersionSet vset;	// VersionSet to which this Version belongs
-	private Version next;		// Next version in linked list
-	private Version prev;		// Previous version in linked list
+	private VersionSet vset_;	// VersionSet to which this Version belongs
+	private Version next_;		// Next version in linked list
+	private Version prev_;		// Previous version in linked list
 	private int refs;			// Number of live refs to this version
 	// List of files per level
-	private final List[] files = new List[Config.kNumLevels];
+	private final List<FileMetaData>[] files_ = new List[Config.kNumLevels];
 
 	// Next file to compact based on seek stats.
 	private FileMetaData fileToCompact;
@@ -46,6 +46,10 @@ public class Version {
 	public void unref() {
 
 	}
+
+	public VersionSet vset() { return vset_; }
+
+	public List<FileMetaData>[] files() { return files_; }
 
 	public List<FileMetaData> getOverlappingInputs(int level,
 			InternalKey begin, 	/* nullptr means before all keys*/
