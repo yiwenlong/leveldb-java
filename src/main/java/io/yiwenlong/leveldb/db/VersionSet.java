@@ -1,6 +1,6 @@
 package io.yiwenlong.leveldb.db;
 
-import com.sun.org.apache.xerces.internal.util.Status;
+import io.yiwenlong.leveldb.format.State;
 import io.yiwenlong.leveldb.log.Writer;
 
 public class VersionSet {
@@ -33,13 +33,13 @@ public class VersionSet {
 	// current version.  Will release *mu while actually writing to the file.
 	// REQUIRES: *mu is held on entry.
 	// REQUIRES: no other thread concurrently calls LogAndApply()
-	public Status LogAndApply(VersionEdit edit) {
-		return null;
+	public State LogAndApply(VersionEdit edit) {
+		return State.ok();
 	}
 
 	// Recover the last saved descriptor from persistent storage.
-	public Status Recover(boolean saveManifest) {
-		return null;
+	public State Recover(boolean saveManifest) {
+		return State.ok();
 	}
 
 	public Version current() {
